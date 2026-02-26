@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal de Cidadania</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Portal de Cidadania</h1>
+      <div id="session-actions"></div>
+    </header>
+
+    <main id="app"></main>
+
+    <template id="auth-template">
+      <section class="card auth-card">
+        <h2>Entrar ou criar conta</h2>
+        <p class="muted">A autenticação social com Google é gerenciada pela Emergent.</p>
+        <button id="google-login" class="primary">Entrar com Google</button>
+        <hr />
+        <form id="register-form" class="form-grid">
+          <h3>Primeiro acesso</h3>
+          <label>Email
+            <input type="email" name="email" required />
+          </label>
+          <label>CPF
+            <input type="text" name="cpf" minlength="11" maxlength="14" placeholder="000.000.000-00" required />
+          </label>
+          <label>Senha
+            <input type="password" name="password" minlength="6" required />
+          </label>
+          <label>Perfil
+            <select name="role">
+              <option value="user">Usuário</option>
+              <option value="staff">Funcionário</option>
+            </select>
+          </label>
+          <button type="submit" class="secondary">Criar conta</button>
+        </form>
+      </section>
+    </template>
+
+    <template id="citizenship-template">
+      <section class="card">
+        <h2>Nova solicitação de cidadania</h2>
+        <form id="citizenship-form" class="form-grid">
+          <label>Selecione a cidadania
+            <select name="type" required>
+              <option value="">Selecione...</option>
+              <option value="Italiana">Italiana</option>
+              <option value="Portuguesa">Portuguesa</option>
+              <option value="Espanhola">Espanhola</option>
+            </select>
+          </label>
+          <button type="submit" class="primary">Iniciar processo</button>
+        </form>
+      </section>
+    </template>
+
+    <template id="portal-template">
+      <section class="layout">
+        <aside class="card sidebar">
+          <h3>Solicitações</h3>
+          <ul id="request-list"></ul>
+          <button id="new-request" class="secondary">+ Nova cidadania</button>
+          <hr />
+          <h3>Notificações</h3>
+          <ul id="notification-list" class="small-list"></ul>
+        </aside>
+
+        <section class="card main-panel">
+          <div id="staff-dashboard" class="hidden">
+            <h3>Dashboard do funcionário</h3>
+            <div class="stats" id="stats-grid"></div>
+            <hr />
+            <h4>Editar dados do usuário</h4>
+            <form id="staff-edit-form" class="form-grid"></form>
+            <hr />
+          </div>
+
+          <div class="tree-panel">
+            <h3>Árvore de Gerações (1ª até 5ª)</h3>
+            <p class="muted">Clique em uma pessoa para gerenciar documentos de nascimento, casamento e óbito.</p>
+            <div id="tree-grid" class="tree-grid"></div>
+          </div>
+        </section>
+
+        <aside class="card detail-panel">
+          <h3 id="person-title">Selecione uma pessoa</h3>
+          <div id="document-panel" class="hidden">
+            <form id="doc-upload-form" class="form-grid">
+              <label>Tipo de documento
+                <select name="docType">
+                  <option value="nascimento">Nascimento</option>
+                  <option value="casamento">Casamento</option>
+                  <option value="obito">Óbito</option>
+                </select>
+              </label>
+              <label>Arquivo (PDF/Imagem)
+                <input type="file" name="file" accept="application/pdf,image/*" required />
+              </label>
+              <button type="submit" class="primary">Enviar documento</button>
+            </form>
+            <h4>Documentos cadastrados</h4>
+            <ul id="doc-list" class="small-list"></ul>
+          </div>
+        </aside>
+      </section>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
